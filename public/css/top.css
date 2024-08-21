@@ -195,3 +195,5 @@
   color: var(--color-darkolivegreen);
   font-family: var(--font-work-sans);
 }
+.map{height: 500px;
+  width: 100%;}

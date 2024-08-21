@@ -1,5 +1,8 @@
-<x-app-layout>
-    @push('styles')
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+@push('styles')
         <link rel="stylesheet" href="{{ asset('css/top.css') }}" />
         <link
             rel="stylesheet"
@@ -14,6 +17,14 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"
         />
     @endpush
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Click Event</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" async defer></script>
+    
+</head>
+<body>
+  
 
     <div class="top">
         <header class="title">
@@ -21,13 +32,13 @@
             <a class="a">和歌山うちわ飯</a>
         </header>
         <section class="location">
+ 
+            <div id="map" style="height: 500px;
+            width: 100%;"></div>
+            <div id="location-info"></div>
             <div class="googlemap-parent">
-                <img
-                    class="googlemap-icon"
-                    alt=""
-                    src="{{ asset('images/googlemap@2x.png') }}"
-                    id="googlemapImage"
-                />
+                
+
                 <img
                     class="kensaku-icon"
                     loading="lazy"
@@ -61,9 +72,8 @@
         </section>
     </div>
 
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
+   <script>
+        document.addEventListener('DOMContentLoaded', function () {
                 var googlemapImage = document.getElementById("googlemapImage");
                 if (googlemapImage) {
                     googlemapImage.addEventListener("click", function (e) {
@@ -92,6 +102,31 @@
                     });
                 }
             });
-        </script>
-    @endpush
-</x-app-layout>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 35.6804, lng: 139.7690 }, // 東京を中心に設定
+                zoom: 12,
+            });
+
+            map.addListener("click", (event) => {
+                getAddress(event.latLng);
+            });
+        }
+
+        function getAddress(latLng) {
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ location: latLng }, (results, status) => {
+                if (status === "OK" && results[0]) {
+                    const cityInfo = results[0].address_components.find(component => component.types.includes("locality"));
+                    const municipality = cityInfo ? cityInfo.long_name : "市町村情報が見つかりませんでした。";
+                    document.getElementById("location-info").innerText = "市町村: " + municipality;
+                } else {
+                    document.getElementById("location-info").innerText = "位置情報の取得に失敗しました。";
+                }
+            });
+        }
+    </script>
+ 
+</body>
+
+</html>
