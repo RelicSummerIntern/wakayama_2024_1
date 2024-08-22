@@ -8,20 +8,15 @@
   <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
-        <label for="image">Upload Image:</label>
-        <input type="file" name="image" id="image" required>
-    </div>
-    <!-- Add other article fields here -->
-    <button type="submit">Submit</button>
-  </form>
-
-  <div class="post">
-    <div class="frame-image frame-child10">
+    <div class="frame-image frame-child10" id="frameImageContainer">
       <img
         class="vector-icon"
         loading="lazy"
-        alt=""
+        alt="Image preview"
+        id="previewImage"
         src="{{ asset('images/vector1.svg') }}" />
+      <input type="file" id="imagefile" style="display:none;">
+    </div>
     </div>
     <div class="textarea">
       <input class="value" placeholder="コメント" type="text" />
@@ -63,7 +58,8 @@
       </div>
     </div>
     <div class="toukou-container">
-      <button class="flex toukou1" id="toukou">
+    <!-- Add other article fields here -->
+    <button class="flex toukou1" id="toukou">
         <div class="post-icon">
           <img
             class="add-icon"
@@ -73,22 +69,23 @@
         </div>
         <div class="div4">投稿</div>
       </button>
-    </div>
-  </div>
+  </form>
+  
   <script>
-    var text3 = document.getElementById("text3");
-    if (text3) {
-      text3.addEventListener("click", function(e) {
-        window.location.href = "./top1.html";
-      });
-    }
+    document.getElementById('frameImageContainer').addEventListener('click', function() {
+      document.getElementById('imagefile').click();
+    });
 
-    var title = document.getElementById("title");
-    if (title) {
-      title.addEventListener("click", function(e) {
-        window.location.href = "./top1.html";
-      });
-    }
+    document.getElementById('imagefile').addEventListener('change', function(event) {
+      var file = event.target.files[0];
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('previewImage').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
 
     var categoryContainer = document.getElementById("categoryContainer");
     if (categoryContainer) {

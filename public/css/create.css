@@ -38,6 +38,12 @@
   border-radius: 28px;
 }
 
+.textarea {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 /* .title-inner {
   height: 77px;
   width: 375px;
