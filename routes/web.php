@@ -28,6 +28,8 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::post('/get-id-by-municipality', [MunicipalityController::class, 'getIdByMunicipality']);
+
 Route::get('/list', [ArticleController::class, 'index'])->name('articles.list');
 Route::post('/list/store', [ArticleController::class, 'store'])->name('articles.store');
 

@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-@push('styles')
+<x-app-layout>
+    @push('styles')
         <link rel="stylesheet" href="{{ asset('css/top.css') }}" />
     @endpush
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Maps Click Event</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" async defer></script>
-    
-</head>
-<body>
-  
+    <title>Google Maps Click Event</title> -->
 
     <x-slot name="header"></x-slot>
 
     <div class="top">
         <section class="location">
- 
-            <div id="map" style="height: 500px;
-            width: 100%;"></div>
+            <div id="map" style="height: 500px; width: 100%;"></div>
             <div id="location-info"></div>
             <div class="googlemap-parent">
-                <img class="googlemap-icon" alt="" src="{{ asset('images/googlemap@2x.png') }}" id="googlemapImage" />
                 <img class="kensaku-icon" loading="lazy" alt="" src="{{ asset('images/kensaku.svg') }}" id="kensaku" />
             </div>
         </section>
-        <section class="content" id="contentSection">
+        <section class="content">
             <div class="toukou" id="toukouContainer">
                 <div class="toukou-child"></div>
                 <div class="toukou-wrapper">
@@ -46,69 +35,39 @@
             </div>
         </section>
     </div>
-
-   <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
-                var googlemapImage = document.getElementById("googlemapImage");
-                if (googlemapImage) {
-                    googlemapImage.addEventListener("click", function (e) {
-                        window.location.href = "{{ url('list') }}";
-                    });
-                }
-                
-                var kensaku = document.getElementById("kensaku");
-                if (kensaku) {
-                    kensaku.addEventListener("click", function (e) {
-                        // Please sync "searchcategory" to the project
-                    });
-                }
-                
-                var toukouContainer = document.getElementById("toukouContainer");
-                if (toukouContainer) {
-                    toukouContainer.addEventListener("click", function (e) {
-                        window.location.href = "{{ url('post') }}";
-                    });
-                }
-                
-                var mypageContainer = document.getElementById("mypageContainer");
-                if (mypageContainer) {
-                    mypageContainer.addEventListener("click", function (e) {
-                        // Please sync "proflie（たぶんいらない）" to the project
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var contentSection = document.getElementById("toukouContainer");
-                if (contentSection) {
-                    contentSection.addEventListener("click", function () {
-                        window.location.href = "{{ route('articles.create') }}";
-                    });
-                }
-            });
-        function initMap() {
-            const map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: 35.6804, lng: 139.7690 }, // 東京を中心に設定
-                zoom: 12,
-            });
+            var googlemapImage = document.getElementById("googlemapImage");
+            if (googlemapImage) {
+                googlemapImage.addEventListener("click", function (e) {
+                    window.location.href = "{{ url('list') }}";
+                });
+            }
 
-            map.addListener("click", (event) => {
-                getAddress(event.latLng);
-            });
-        }
+            var kensaku = document.getElementById("kensaku");
+            if (kensaku) {
+                kensaku.addEventListener("click", function (e) {
+                    // Please sync "searchcategory" to the project
+                });
+            }
 
-        function getAddress(latLng) {
-            const geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ location: latLng }, (results, status) => {
-                if (status === "OK" && results[0]) {
-                    const cityInfo = results[0].address_components.find(component => component.types.includes("locality"));
-                    const municipality = cityInfo ? cityInfo.long_name : "市町村情報が見つかりませんでした。";
-                    document.getElementById("location-info").innerText = "市町村: " + municipality;
-                } else {
-                    document.getElementById("location-info").innerText = "位置情報の取得に失敗しました。";
-                }
-            });
-        }
+            var toukouContainer = document.getElementById("toukouContainer");
+            if (toukouContainer) {
+                toukouContainer.addEventListener("click", function (e) {
+                    window.location.href = "{{ url('post') }}";
+                });
+            }
+
+            var mypageContainer = document.getElementById("mypageContainer");
+            if (mypageContainer) {
+                mypageContainer.addEventListener("click", function (e) {
+                    // Please sync "profile（たぶんいらない）" to the project
+                });
+            }
+        });
+
     </script>
- 
-</body>
-
-</html>
+    <script src="{{ asset('/js/map.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRXSG9YD09Kr9zE8j67ukkgNzpSMW7KKU&callback=initMap" async
+        defer></script>
+</x-app-layout>
