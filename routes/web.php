@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -17,12 +18,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('top');
-});
+})->name('top');
+
+Route::get('/category', function () {
+    return view('category');
+})->name('category');
 
 Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('/list', [ArticleController::class, 'index'])->name('articles.list');
+Route::post('/list/store', [ArticleController::class, 'store'])->name('articles.store');
+
+Route::get('/create', [ArticleController::class, 'create'])->name('articles.create');
+
+Route::get('/detail', function () {
+    return view('detail');
+})->name('detail');
 
 
 Route::middleware('auth')->group(function () {
@@ -40,5 +53,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/myposts', [PostController::class, 'myPosts'])->name('myposts');
 });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
