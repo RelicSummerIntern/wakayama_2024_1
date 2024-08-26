@@ -18,7 +18,7 @@
             src="{{ asset('images/vector1.svg') }}" />
           <input type="file" name="image" id="image" style="opacity: 0;" required>
         </div>
-        <div class="textarea">
+        <div>
           <input class="value" name="content" placeholder="コメント" type="text" />
         </div>
         
@@ -71,6 +71,12 @@
               src="{{ asset('images/vector-2.svg') }}" />
           </div>
         </div>
+
+        <!-- 店名の入力欄 -->
+        <div>
+          <input class="value" name="store_name" placeholder="店名" type="text" />
+        </div>
+
         <div class="toukou-container">
           <button class="flex toukou1" id="toukou" type="submit">
             <div class="post-icon">

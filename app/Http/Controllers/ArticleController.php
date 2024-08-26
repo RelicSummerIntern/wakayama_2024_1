@@ -66,6 +66,7 @@ class ArticleController extends Controller
         $request->validate([
             'content' => 'nullable|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'store_name' => 'nullable|string',
             'city_id' => 'required|integer',
             'genre' => 'nullable|string',
             'ninzu' => 'nullable|string',
@@ -80,6 +81,7 @@ class ArticleController extends Controller
             Article::create([
                 'content' => $request->input('content'),
                 'image_path' => $file_name,
+                'store_name' => $request->input('store_name'),
                 'city_id' => $city_id,
                 'genre' => $request->input('genre'),
                 'ninzu' => $request->input('ninzu'),
