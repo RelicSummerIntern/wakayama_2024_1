@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('content')->nullable();
             $table->string('image_path');
+            $table->string('store_name')->nullable();
             $table->integer('city_id');
             $table->string('genre')->nullable();
             $table->string('ninzu')->nullable();
