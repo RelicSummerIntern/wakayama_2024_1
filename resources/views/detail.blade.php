@@ -9,14 +9,15 @@
       <main class="content2">
         <div class="content-child"></div>
         <div class="inner-content">
-        <button type="button" onClick="history.back()">
-          <img
+          <button type="button" onClick="history.back()">
+            <img
               class="inner-content-child"
               loading="lazy"
               alt="Description of image"
               src="{{ asset('images/group-43.svg') }}"
-            /></button>
-            
+            />
+          </button>
+          <div class="store_name">{{$article->store_name}}</div>
         </div>
         <section >
         <!-- 写真　全体が映るよう"object-fit: contain;"を使う -->
@@ -33,9 +34,10 @@
                     <div class="relic">Relic太郎</div>
                   </div>
                 </div>
-                <div>{{$article->content}}</div>
+                <div class="text_size">{{$article->content}}</div>
               </div>
             </div>
+            <div class="icon_line">
             <img
               class="iine-icon"
               loading="lazy"
@@ -49,6 +51,7 @@
               alt="Share icon"
               src="{{ asset('images/share.svg') }}"
             />
+            </div>
           </div>
         </section>
       </main>

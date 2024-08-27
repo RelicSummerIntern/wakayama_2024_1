@@ -46,7 +46,7 @@
   }
   .inner-content-child {
     height: 50px;
-    width: 50px;
+    width: 100%;
     position: relative;
     z-index: 1;
   }
@@ -89,7 +89,10 @@
     z-index: 0;
   }
   .icon1 {
-    width: 50px;
+    width: auto;
+    height: 50px;
+    margin: 10px;
+    aspect-ratio: 1;
     border-radius: 50%;
     background-color: #d8d8d8;
     cursor: pointer;
@@ -98,6 +101,7 @@
   .relic {
     align-self: stretch;
     position: relative;
+    font-size: 30px;
     z-index: 2;
   }
   .comment-header,
@@ -112,7 +116,7 @@
     padding: var(--padding-5xs) 0 0;
   }
   .comment-header {
-    align-self: stretch;
+    align-self: flex-start;
     flex-direction: row;
     gap: var(--gap-mini);
   }
@@ -152,17 +156,12 @@
   .iine-icon {
     width: 29px;
     height: 29px;
-    position: relative;
-    z-index: 2;
+    margin: 10px;
   }
   .share-icon {
     width: 21.8px;
     height: 23.5px;
-    position: absolute;
-    margin: 0 !important;
-    right: 9.6px;
-    bottom: 14.7px;
-    z-index: 2;
+    margin: 10px;
   }
   .comment-wrapper,
   .comment-wrapper-wrapper,
@@ -175,13 +174,11 @@
   .comment-wrapper {
     align-self: stretch;
     flex: 1;
-    border-radius: var(--br-xl);
+    /* border-radius: var(--br-xl); */
     background-color: var(--color-palegoldenrod-100);
     flex-direction: column;
     align-items: flex-end;
-    padding: var(--padding-base) 46px var(--padding-xs) var(--padding-2xl);
     position: relative;
-    gap: 32px;
     max-width: 100%;
     z-index: 1;
   }
@@ -192,7 +189,7 @@
   }
   .comment-wrapper-wrapper {
     align-self: stretch;
-    height: 172px;
+    height: 30%;
     flex-direction: row;
     padding: 0 13px 0 var(--padding-2xs);
     max-width: 100%;
@@ -219,4 +216,16 @@
     line-height: normal;
     letter-spacing: normal;
   }
-  
+  .store_name{
+    margin-top: 5px;
+    font-size: 40px;
+  }
+
+  .icon_line{
+    display: flex;
+    width: auto;
+  }
+
+  .text_size{
+    height: auto;
+  }

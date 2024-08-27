@@ -66,7 +66,7 @@ class ArticleController extends Controller
         $request->validate([
             'content' => 'nullable|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'store_name' => 'nullable|string',
+            'store_name' => 'nullable|string|max:30',
             'city_id' => 'required|integer',
             'genre' => 'nullable|string',
             'ninzu' => 'nullable|string',
